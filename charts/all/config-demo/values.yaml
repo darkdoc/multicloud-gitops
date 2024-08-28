@@ -1,10 +1,10 @@
 ---
 secretStore:
-  name: vault-backend
+  name: kubernetes-backend
   kind: ClusterSecretStore
 
 configdemosecret:
-  key: secret/data/global/config-demo
+  key: config-demo
 
 global:
   hubClusterDomain: hub.example.com

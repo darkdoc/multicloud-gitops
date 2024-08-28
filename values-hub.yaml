@@ -3,10 +3,10 @@ clusterGroup:
   isHubCluster: true
   namespaces:
     - open-cluster-management
-    - vault
     - golang-external-secrets
     - config-demo
     - hello-world
+    - validated-patterns-secrets
   subscriptions:
     acm:
       name: advanced-cluster-management
@@ -48,11 +48,6 @@ clusterGroup:
           kind: ManagedClusterInfo
           jsonPointers:
             - /spec/loggingCA
-    vault:
-      name: vault
-      namespace: vault
-      project: hub
-      path: common/hashicorp-vault
     golang-external-secrets:
       name: golang-external-secrets
       namespace: golang-external-secrets
@@ -150,7 +145,6 @@ clusterGroup:
 #      path: path/to/myapp
 #      repoURL: https://github.com/vendor/applications.git
 #      targetRevision: main
-
 #  managedSites:
 #    factory:
 #      name: factory
