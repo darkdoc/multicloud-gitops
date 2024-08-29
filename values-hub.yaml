@@ -3,10 +3,8 @@ clusterGroup:
   isHubCluster: true
   namespaces:
     - open-cluster-management
-    - golang-external-secrets
     - config-demo
     - hello-world
-    - validated-patterns-secrets
   subscriptions:
     acm:
       name: advanced-cluster-management
@@ -48,11 +46,6 @@ clusterGroup:
           kind: ManagedClusterInfo
           jsonPointers:
             - /spec/loggingCA
-    golang-external-secrets:
-      name: golang-external-secrets
-      namespace: golang-external-secrets
-      project: hub
-      path: common/golang-external-secrets
     config-demo:
       name: config-demo
       namespace: config-demo
