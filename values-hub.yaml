@@ -6,13 +6,22 @@ clusterGroup:
     - vault
     - golang-external-secrets
     - config-demo
-    - hello-world
+    - hello-world:
+        annotations:
+          argocd.argoproj.io/sync-wave: "-10"
   subscriptions:
-    acm:
-      name: advanced-cluster-management
-      namespace: open-cluster-management
-      channel: release-2.11
+    # acm:
+    #   name: advanced-cluster-management
+    #   namespace: open-cluster-management
+    #   channel: release-2.11
       #csv: advanced-cluster-management.v2.6.1
+    # this is just for testing the syncwave with a subscription
+    odf:
+      name: odf-operator
+      namespace: config-demo
+      source: redhat-operators
+      annotations:
+        argocd.argoproj.io/sync-wave: "20"
   projects:
     - hub
     - config-demo
@@ -38,17 +47,17 @@ clusterGroup:
   #   - '/overrides/values-{{ $.Values.global.hubClusterDomain }}.yaml'
   #   - '/overrides/values-{{ $.Values.global.localClusterDomain }}.yaml'
   applications:
-    acm:
-      name: acm
-      namespace: open-cluster-management
-      project: hub
-      chart: acm
-      chartVersion: 0.1.*
-      ignoreDifferences:
-        - group: internal.open-cluster-management.io
-          kind: ManagedClusterInfo
-          jsonPointers:
-            - /spec/loggingCA
+  #   acm:
+  #     name: acm
+  #     namespace: open-cluster-management
+  #     project: hub
+  #     chart: acm
+  #     chartVersion: 0.1.*
+  #     ignoreDifferences:
+  #       - group: internal.open-cluster-management.io
+  #         kind: ManagedClusterInfo
+  #         jsonPointers:
+  #           - /spec/loggingCA
     vault:
       name: vault
       namespace: vault
@@ -71,6 +80,8 @@ clusterGroup:
       namespace: hello-world
       project: hello-world
       path: charts/all/hello-world
+      annotations:
+        argocd.argoproj.io/sync-wave: "50"
   imperative:
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
