@@ -5,3 +5,6 @@ metadata:
   namespace: {{ $.Values.global.pattern }}-{{ .Values.clusterGroup.name }}
   labels:
     config.openshift.io/inject-trusted-cabundle: 'true'
+  annotations:
+    argocd.argoproj.io/sync-wave: "-98"
+

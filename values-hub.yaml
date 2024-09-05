@@ -2,17 +2,38 @@ clusterGroup:
   name: hub
   isHubCluster: true
   namespaces:
-    - open-cluster-management
-    - vault
-    - golang-external-secrets
-    - config-demo
-    - hello-world
+    multicluster-engine:
+      annotations:
+        argocd.argoproj.io/sync-wave: "-50"
+    open-cluster-management:
+      annotations:
+        argocd.argoproj.io/sync-wave: "-50"
+    vault:
+      annotations:
+        argocd.argoproj.io/sync-wave: "-50"
+    golang-external-secrets:
+      annotations:
+        argocd.argoproj.io/sync-wave: "-40"
+    config-demo:
+      annotations:
+        argocd.argoproj.io/sync-wave: "-10"
+    hello-world:
+      annotations:
+        argocd.argoproj.io/sync-wave: "-10"
   subscriptions:
     acm:
       name: advanced-cluster-management
       namespace: open-cluster-management
       channel: release-2.10
+      annotations:
+        argocd.argoproj.io/sync-wave: "-40"
       #csv: advanced-cluster-management.v2.6.1
+    multicluster-engine:
+      name: multicluster-engine
+      namespace: multicluster-engine
+      channel: stable-2.5
+      annotations:
+        argocd.argoproj.io/sync-wave: "-40"
   projects:
     - hub
     - config-demo
@@ -48,16 +69,22 @@ clusterGroup:
           kind: ManagedClusterInfo
           jsonPointers:
             - /spec/loggingCA
+      annotations:
+        argocd.argoproj.io/sync-wave: "-40"
     vault:
       name: vault
       namespace: vault
       project: hub
       path: common/hashicorp-vault
+      annotations:
+        argocd.argoproj.io/sync-wave: "-50"
     golang-external-secrets:
       name: golang-external-secrets
       namespace: golang-external-secrets
       project: hub
       path: common/golang-external-secrets
+      annotations:
+        argocd.argoproj.io/sync-wave: "-40"
     config-demo:
       name: config-demo
       namespace: config-demo

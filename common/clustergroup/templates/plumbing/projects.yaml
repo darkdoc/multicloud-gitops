@@ -19,6 +19,8 @@ metadata:
 {{- else }}
   namespace: {{ $namespace }}
 {{- end }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-98"
 spec:
   description: "Pattern {{ . }}"
   destinations:
