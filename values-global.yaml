@@ -10,7 +10,8 @@ main:
   clusterGroupName: hub
   multiSourceConfig:
     enabled: true
-    clusterGroupChartVersion: "0.9.*"
+    clusterGroupGitRepoUrl: https://github.com/darkdoc/clustergroup-chart
+    clusterGroupChartGitRevision: k8s_kind
   gitops:
     channel: alpha
     sourceNamespace: olm
@@ -19,3 +20,4 @@ main:
   patternsOperator:
     source: operatorhubio-catalog
     sourceNamespace: olm
+
