@@ -55,6 +55,32 @@ clusterGroup:
       project: hub
       chart: hashicorp-vault
       chartVersion: 0.1.*
+      overrides:
+        - name: global.openshift
+          value: false
+        - name: vault.server.standalone.config
+          value: |
+            ui = true
+            listener "tcp" {
+              address = "[::]:8200"
+              cluster_address = "[::]:8201"
+              tls_disable = 1
+            }
+            storage "file" {
+              path = "/vault/data"
+            }
+        - name: vault.server.extraVolumes
+          value: 'null'
+        - name: vault.server.extraEnvironmentVars
+          value: 'null'
+        - name: vault.server.image.repository
+          value: "hashicorp/vault"
+        - name: vault.server.image.tag
+          value: "1.18.0"
+        - name: vault.injector.enabled
+          value: true
+
+
     golang-external-secrets:
       name: golang-external-secrets
       namespace: golang-external-secrets
