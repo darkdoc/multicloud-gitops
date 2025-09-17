@@ -8,14 +8,14 @@ clusterGroup:
         targetNamespaces: []
     - golang-external-secrets
     - hello-world
-    - open-cluster-management
+    # - open-cluster-management
     - vault
   subscriptions:
-    acm:
-      name: advanced-cluster-management
-      namespace: open-cluster-management
-      channel: release-2.14
-      # csv: advanced-cluster-management.v2.6.1
+    # acm:
+    #   name: advanced-cluster-management
+    #   namespace: open-cluster-management
+    #   channel: release-2.14
+    #   # csv: advanced-cluster-management.v2.6.1
     eso:
       name: external-secrets-operator
       namespace: external-secrets-operator
@@ -55,12 +55,12 @@ clusterGroup:
   #   - '/overrides/values-{{ $.Values.global.hubClusterDomain }}.yaml'
   #   - '/overrides/values-{{ $.Values.global.localClusterDomain }}.yaml'
   applications:
-    acm:
-      name: acm
-      namespace: open-cluster-management
-      project: hub
-      chart: acm
-      chartVersion: 0.1.*
+    # acm:
+    #   name: acm
+    #   namespace: open-cluster-management
+    #   project: hub
+    #   chart: acm
+    #   chartVersion: 0.1.*
     vault:
       name: vault
       namespace: vault
