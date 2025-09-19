@@ -16,11 +16,11 @@ clusterGroup:
     #   namespace: open-cluster-management
     #   channel: release-2.14
     #   # csv: advanced-cluster-management.v2.6.1
+
     eso:
-      name: external-secrets-operator
+      name: openshift-external-secrets-operator
       namespace: external-secrets-operator
-      channel: alpha
-      source: test-eso-operator
+      channel: tech-preview-v0.1
       config:
         resources:
           requests:
