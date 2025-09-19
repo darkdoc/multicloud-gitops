@@ -72,7 +72,7 @@ clusterGroup:
       namespace: golang-external-secrets
       project: hub
       path: "."
-      repoURL: https://github.com/mbaldessari/golang-external-secrets-chart
+      repoURL: https://github.com/darkdoc/golang-external-secrets-chart
       chartVersion: downstream-eso
     config-demo:
       name: config-demo
