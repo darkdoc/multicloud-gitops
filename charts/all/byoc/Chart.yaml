@@ -1,0 +1,6 @@
+apiVersion: v2
+description: A Helm chart to create managed clusters or import them
+keywords:
+- pattern
+name: byoc
+version: 0.0.1
