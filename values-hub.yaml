@@ -74,12 +74,12 @@ clusterGroup:
           value: 'null'
         - name: vault.server.extraEnvironmentVars
           value: 'null'
-        - name: vault.server.image.repository
-          value: "hashicorp/vault"
-        - name: vault.server.image.tag
-          value: "1.18.0"
-        - name: vault.injector.enabled
-          value: true
+        # - name: vault.server.image.repository
+        #   value: "hashicorp/vault"
+        # - name: vault.server.image.tag
+        #   value: "1.18.0"
+        # - name: vault.injector.enabled
+        #   value: true
 
 
     golang-external-secrets:
