@@ -1,0 +1,12 @@
+apiVersion: v2
+name: vp-manage-proxy-cluster-ca
+description: >-
+
+type: application
+version: 0.1.0
+keywords:
+  - openshift
+  - proxy
+  - tls
+  - validated-patterns
+  - externalsecrets
