@@ -1,7 +1,7 @@
 clusterGroup:
   name: standalone
   namespaces:
-    vault:
+    # vault:
     external-secrets-operator:
       operatorGroup: true
       targetNamespaces: []
@@ -21,6 +21,7 @@ clusterGroup:
   # We can use self-referential variables because the chart calls the tpl function with these variables defined
   sharedValueFiles:
     - '/overrides/values-{{ $.Values.global.clusterPlatform }}.yaml'
+    - '/overrides/values-external-vault.yaml'
   # sharedValueFiles is a flexible mechanism that will add the listed valuefiles to every app defined in the
   # applications section.
   #
@@ -29,18 +30,20 @@ clusterGroup:
   #   - '/overrides/values-{{ $.Values.global.hubClusterDomain }}.yaml'
   #   - '/overrides/values-{{ $.Values.global.localClusterDomain }}.yaml'
   applications:
-    vault:
-      name: vault
-      namespace: vault
-      argoProject: hub
-      chart: hashicorp-vault
-      chartVersion: 0.1.*
+    # vault:
+    #   name: vault
+    #   namespace: vault
+    #   argoProject: hub
+    #   chart: hashicorp-vault
+    #   chartVersion: 0.1.*
     openshift-external-secrets:
       name: openshift-external-secrets
       namespace: external-secrets
       argoProject: hub
-      chart: openshift-external-secrets
-      chartVersion: 0.0.*
+      path: "."
+      chartVersion: add_external_address
+      repoURL: https://github.com/mhjacks/openshift-external-secrets-chart
+
     config-demo:
       name: config-demo
       namespace: config-demo

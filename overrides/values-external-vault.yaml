@@ -1,0 +1,19 @@
+ocpExternalSecrets:
+  vault:
+    externalAddress: https://vault-vault.apps.aeros-vp-hub.aws.validatedpatterns.io
+    external:
+      auth:
+        userPass:
+          username: testuser
+          secretRef:
+            name: vault-auth-secret
+            namespace: default
+            key: password
+  caProvider:
+    enabled: true
+    #host cluster is needed here, since this is a hub cluster from this pattern
+    hostCluster:
+      type: Secret
+      name: external-vault-ca
+      key: ca.crt
+      namespace: default
