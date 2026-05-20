@@ -38,13 +38,11 @@ spec:
 {{- $certs = regexFindAll "(?s)-----BEGIN CERTIFICATE-----.*?-----END CERTIFICATE-----" $v -1 }}
 {{- end }}
 {{- range $certs }}
-{{- $all = append $all . }}
+{{- $all = append $all (. | replace "\\n" "\n") }}
 {{- end }}
 {{- end }}
 {{- end }}
-{{- range $all | uniq -}}
-{{ . | replace "\\n" "\n" }}
-{{- end }}
+{{- join "\n\n" ($all | uniq) | trimPrefix "\n" | trimSuffix "\n" }}
   ` | indent 10 }}
   dataFrom:
     - find:
