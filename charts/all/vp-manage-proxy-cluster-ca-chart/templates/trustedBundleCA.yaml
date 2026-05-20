@@ -1,0 +1,58 @@
+{{- if .Values.vpManageProxyClusterCa.pushAPIserverCAbundle  }}
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: PushSecret
+metadata:
+  name: trusted-bundle-ps
+  namespace: openshift-config-managed
+spec:
+  updatePolicy: Replace
+  deletionPolicy: Delete
+  refreshInterval: 15s
+  secretStoreRefs:
+    - kind: ClusterSecretStore
+      name: vault-backend
+  selector:
+    secret:
+      name: trusted-bundle-intermediary
+  data:
+    - conversionStrategy: None
+      match:
+        secretKey: ca-bundle.crt
+        remoteRef:
+          remoteKey: pushsecrets/{{ .Values.global.clusterDomain }}-trusted-bundle-ca-{{ .Values.vpManageProxyClusterCa.pushSecretPostfix }}
+          property: cert
+---
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
+metadata:
+  name: trusted-bundle-intermediary
+  namespace: openshift-config-managed
+spec:
+  refreshInterval: 15s
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: vault-backend
+  target:
+    name: trusted-bundle-intermediary
+    creationPolicy: Owner
+    deletionPolicy: Retain
+    template:
+      mergePolicy: Merge
+      engineVersion: v2
+      templateFrom:
+      - target: Data
+        configMap:
+          # name of the configmap to pull in
+          name: trusted-ca-bundle
+          # here you define the keys that should be used as template
+          items:
+          - key: ca-bundle.crt
+            templateAs: Values
+  data:
+  # TODO FIX this needs to point to secret in vault
+  - secretKey: asd
+    remoteRef:
+      key: "global/config-demo"
+      property: secret
+{{- end }}

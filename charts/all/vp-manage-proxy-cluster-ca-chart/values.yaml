@@ -1,1 +1,34 @@
 ---
+# -- Dictionary of all the settings to configure this chart
+# @default -- depends on the individual settings
+vpManageProxyClusterCa:
+  pushTrustedCAbundle: true
+  pushAPIserverCAbundle: true
+  pushIngressCAbundle: true
+
+  createAggregatedCM: true
+
+  # If the aggregated configmap is created, this postfix will be used to fetch all push secret from vault
+  # this postfix will be appended to all created pushsecret too
+  pushSecretPostfix: "vp-aggregate"
+
+  # Any additional CA's that is stored in a configmap
+  pushAdditionalCMCAs: []
+  # {
+  #   name:
+  #   namespace:
+  #   key:
+  # }
+  # Any additional CA's that is stored in a secret
+  pushAdditionalSecretCAs: []
+  # {
+  #   name:
+  #   namespace:
+  #   key:
+  # }
+
+# -- The global namespace containes some globally used variables used in patterns
+# @default -- depends on the individual settings
+global:
+  # -- The DNS entry for the cluster the chart is being rendered on
+  clusterDomain: foo.example.com

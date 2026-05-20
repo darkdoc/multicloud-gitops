@@ -1,0 +1,29 @@
+{{- if .Values.vpManageProxyClusterCa.pushIngressCAbundle  }}
+---
+apiVersion: external-secrets.io/v1alpha1
+kind: PushSecret
+metadata:
+  name: ingress-router-ca-ps
+  namespace: openshift-ingress-operator
+spec:
+  updatePolicy: Replace
+  deletionPolicy: Delete
+  refreshInterval: 15s
+  secretStoreRefs:
+    - kind: ClusterSecretStore
+      name: vault-backend
+  selector:
+    secret:
+      name: router-ca
+  data:
+    - conversionStrategy: None
+      match:
+        secretKey: tls.crt
+        remoteRef:
+          remoteKey: pushsecrets/{{ .Values.global.clusterDomain }}-ingress-ca-{{ .Values.vpManageProxyClusterCa.pushSecretPostfix }}
+          property: cert
+{{- end }}
+
+
+
+
