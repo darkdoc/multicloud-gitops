@@ -66,16 +66,6 @@ clusterGroup:
       path: "."
       chartVersion: eso_chart_update
       repoURL: https://github.com/darkdoc/golang-external-secrets-chart
-      syncPolicy:
-        automated: {}
-        retry:
-          limit: 20
-          backoff:
-            duration: 5s
-            factor: 2
-            maxDuration: 3m
-        syncOptions:
-          - ServerSideApply=true
       overrides:
       - name: external-secrets.genericTargets.enabled
         value: true
