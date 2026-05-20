@@ -2,30 +2,45 @@
 # -- Dictionary of all the settings to configure this chart
 # @default -- depends on the individual settings
 vpManageProxyClusterCa:
+  # -- When set to true the openshift-config-managed/trusted-ca-bundle configmap's ca-bundle.crt key will be pushed
   pushTrustedCAbundle: true
+
+  # -- When set to true the openshift-config-managed/kube-apiserver-server-ca configmap's ca-bundle.crt key will be pushed
   pushAPIserverCAbundle: true
+
+  # -- When set to true the openshift-ingress-operator/router-ca secret's tls.crt key will be pushed
   pushIngressCAbundle: true
 
-  createAggregatedCM: true
+  # -- Dictionary to configure the aggregated configmap
+  # @default -- depends on the individual settings
+  aggregateCM:
+    # -- When set to true the aggregated configmap will be created (using a regex to fetch the CA-s to aggregate)
+    enable: true
+    # -- The name for the aggregated configmap
+    name: ca-aggregate
+    # -- The namespace for the aggregated configmap
+    namespace: openshift-config
 
-  # If the aggregated configmap is created, this postfix will be used to fetch all push secret from vault
-  # this postfix will be appended to all created pushsecret too
+  # -- The postfix for the push secrets (also used as a regex when the aggregated configmap is created to fetch those)
   pushSecretPostfix: "vp-aggregate"
 
-  # Any additional CA's that is stored in a configmap
+  # -- The refresh interval for the push secrets in this chart
+  pushSecretRefreshInterval: 15s
+
+  # -- A list of any additional CA's that will be pushed that is stored in a configmap
   pushAdditionalCMCAs: []
-  # {
-  #   name:
-  #   namespace:
-  #   key:
-  # }
-  # Any additional CA's that is stored in a secret
+  # pushAdditionalCMCAs:
+  # -  name: test-configmap
+  #    namespace: test-ns
+  #    key: key_in_configmap
+
+  # -- A list of any additional CA's that will be pushed that is stored in a secret
   pushAdditionalSecretCAs: []
-  # {
-  #   name:
-  #   namespace:
-  #   key:
-  # }
+  # pushAdditionalSecretCAs: 
+  # -  name: test-secret
+  #    namespace: test-ns
+  #    key: key_in_secret
+
 
 # -- The global namespace containes some globally used variables used in patterns
 # @default -- depends on the individual settings

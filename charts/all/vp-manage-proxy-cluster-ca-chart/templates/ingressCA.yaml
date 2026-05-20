@@ -8,7 +8,7 @@ metadata:
 spec:
   updatePolicy: Replace
   deletionPolicy: Delete
-  refreshInterval: 15s
+  refreshInterval: {{ .Values.vpManageProxyClusterCa.pushSecretRefreshInterval }}
   secretStoreRefs:
     - kind: ClusterSecretStore
       name: vault-backend

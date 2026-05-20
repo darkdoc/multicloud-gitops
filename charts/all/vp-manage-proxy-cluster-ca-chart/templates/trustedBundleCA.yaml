@@ -8,7 +8,7 @@ metadata:
 spec:
   updatePolicy: Replace
   deletionPolicy: Delete
-  refreshInterval: 15s
+  refreshInterval: {{ .Values.vpManageProxyClusterCa.pushSecretRefreshInterval }}
   secretStoreRefs:
     - kind: ClusterSecretStore
       name: vault-backend
@@ -29,7 +29,7 @@ metadata:
   name: trusted-bundle-intermediary
   namespace: openshift-config-managed
 spec:
-  refreshInterval: 15s
+  refreshInterval: {{ .Values.vpManageProxyClusterCa.pushSecretRefreshInterval }}
   secretStoreRef:
     kind: ClusterSecretStore
     name: vault-backend

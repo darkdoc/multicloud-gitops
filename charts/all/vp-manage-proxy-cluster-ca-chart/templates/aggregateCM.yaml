@@ -1,13 +1,13 @@
-{{- if .Values.vpManageProxyClusterCa.createAggregatedCM  }}
+{{- if .Values.vpManageProxyClusterCa.aggregateCM.enable  }}
 # create external secret which creates an aggregated configmap from all the certs in vault under pushsecrets/".*-aggregate$"
 ---
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
-  name: ca-aggregate
-  namespace: openshift-config
+  name: {{ .Values.vpManageProxyClusterCa.aggregateCM.name }}
+  namespace: {{ .Values.vpManageProxyClusterCa.aggregateCM.namespace }}
 spec:
-  refreshInterval: 15s
+  refreshInterval: {{ .Values.vpManageProxyClusterCa.pushSecretRefreshInterval }}
   secretStoreRef:
     kind: ClusterSecretStore
     name: vault-backend

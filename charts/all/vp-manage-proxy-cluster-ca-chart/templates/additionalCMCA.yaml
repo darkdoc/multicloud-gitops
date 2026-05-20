@@ -1,40 +1,40 @@
-{{- if .Values.vpManageProxyClusterCa.pushAPIserverCAbundle  }}
+{{- range .Values.vpManageProxyClusterCa.pushAdditionalCMCAs }}
 ---
 apiVersion: external-secrets.io/v1alpha1
 kind: PushSecret
 metadata:
-  name: apiserver-ca-ps
-  namespace: openshift-config-managed
+  name: {{ .name }}-ps
+  namespace: {{ .namespace }}
 spec:
   updatePolicy: Replace
   deletionPolicy: Delete
-  refreshInterval: {{ .Values.vpManageProxyClusterCa.pushSecretRefreshInterval }}
+  refreshInterval: {{ $.Values.vpManageProxyClusterCa.pushSecretRefreshInterval }}
   secretStoreRefs:
     - kind: ClusterSecretStore
       name: vault-backend
   selector:
     secret:
-      name: kube-apiserver-server-ca-intermediary
+      name: {{ .name }}-intermediary
   data:
     - conversionStrategy: None
       match:
-        secretKey: ca-bundle.crt
+        secretKey: {{ .key }}
         remoteRef:
-          remoteKey: pushsecrets/{{ .Values.global.clusterDomain }}-kube-apiserver-ca-{{ .Values.vpManageProxyClusterCa.pushSecretPostfix }}
+          remoteKey: pushsecrets/{{ $.Values.global.clusterDomain }}-{{ .name }}-{{ $.Values.vpManageProxyClusterCa.pushSecretPostfix }}
           property: cert
 ---
 apiVersion: external-secrets.io/v1
 kind: ExternalSecret
 metadata:
-  name: kube-apiserver-server-ca-intermediary
-  namespace: openshift-config-managed
+  name: {{ .name }}-intermediary
+  namespace: {{ .namespace }}
 spec:
-  refreshInterval: {{ .Values.vpManageProxyClusterCa.pushSecretRefreshInterval }}
+  refreshInterval: {{ $.Values.vpManageProxyClusterCa.pushSecretRefreshInterval }}
   secretStoreRef:
     kind: ClusterSecretStore
     name: vault-backend
   target:
-    name: kube-apiserver-server-ca-intermediary
+    name: {{ .name }}-intermediary
     creationPolicy: Owner
     deletionPolicy: Retain
     template:
@@ -44,10 +44,10 @@ spec:
       - target: Data
         configMap:
           # name of the configmap to pull in
-          name: kube-apiserver-server-ca
+          name: {{ .name }}
           # here you define the keys that should be used as template
           items:
-          - key: ca-bundle.crt
+          - key: {{ .key }}
             templateAs: Values
   data:
   # TODO FIX this needs to point to secret in vault
