@@ -75,6 +75,17 @@ clusterGroup:
       argoProject: hello-world
       path: charts/all/hello-world
   imperative:
+    ansibleDevMode:
+      enabled: true
+      requirementsFile: requirements.yml
+      requirementsContent: |
+        ---
+        collections:
+          - kubernetes.core
+          - name: rhvp.cluster_utils
+            type: git
+            source: https://github.com/day0hero/rhvp.cluster_utils.git
+            version: ocp_eso
     # NOTE: We *must* use lists and not hashes. As hashes lose ordering once parsed by helm
     # The default schedule is every 10 minutes: imperative.schedule
     # Total timeout of all jobs is 1h: imperative.activeDeadlineSeconds
