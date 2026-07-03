@@ -4,6 +4,11 @@
 
 [Live build status](https://validatedpatterns.io/ci/?pattern=mcgitops)
 
+[![CI Status](https://img.shields.io/endpoint?url=https://validated-patterns-ci-tests-poc.s3.eu-north-1.amazonaws.com/ci-badges/mcg-aws-4-20-standalone-stable-badge.json)](https://validatedpatterns.io/ci/?pattern=mcgitops)
+
+[![CI Status](https://img.shields.io/endpoint?url=https://validated-patterns-ci-tests-poc.s3.eu-north-1.amazonaws.com/ci-badges/mcg-aws-4-20-hub-spoke-stable-badge.json)](https://validatedpatterns.io/ci/?pattern=mcgitops)
+
+[![CI Status](https://img.shields.io/endpoint?url=https://validated-patterns-ci-tests-poc.s3.eu-north-1.amazonaws.com/ci-badges/mcg-aws-4-21-hub-spoke-stable-badge.json)](https://validatedpatterns.io/ci/?pattern=mcgitops)
 ## Start Here
 
 If you've followed a link to this repository, but are not really sure what it contains
