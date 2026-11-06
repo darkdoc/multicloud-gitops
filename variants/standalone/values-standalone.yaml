@@ -21,6 +21,8 @@ clusterGroup:
   # We can use self-referential variables because the chart calls the tpl function with these variables defined
   sharedValueFiles:
     - '/overrides/values-{{ $.Values.global.clusterPlatform }}.yaml'
+    - '/aap-starter/variants/minimal-aap/values-minimal-aap.yaml'
+  # if a shared value file starts with an entry in the subPatterns, argocd will use the file from that repo instead from the pattern repo
   # sharedValueFiles is a flexible mechanism that will add the listed valuefiles to every app defined in the
   # applications section.
   #
