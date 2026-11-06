@@ -11,3 +11,9 @@ main:
   multiSourceConfig:
     enabled: true
     clusterGroupChartVersion: "0.9.*"
+  subPatterns:
+    aap-starter:
+      repoURL: https://github.com/validatedpatterns/aap-starter-kit
+      targetRevision: main
+    mcg-acm:
+      repoURL: https://github.com/darkdoc/multicloud-gitops.git
