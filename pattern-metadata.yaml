@@ -27,6 +27,10 @@ requirements:
         aws:
           replicas: 3
           type: m5.2xlarge
+        ibmcloud:
+          replicas: 3
+          type: bx2-8x32 # ~m5.2xlarge
+
     controlPlane:
       platform:
         gcp:
@@ -38,6 +42,9 @@ requirements:
         aws:
           replicas: 3
           type: m5.xlarge
+        ibmcloud:
+          replicas: 3
+          type: bx2-4x16 # ~m5.xlarge
   spoke: # optional - represents the clusters imported into ACM
     compute:
       platform:
@@ -50,6 +57,9 @@ requirements:
         aws:
           replicas: 0
           type: m5.2xlarge
+        ibmcloud:
+          replicas: 0
+          type: bx2-8x32
     controlPlane:
       platform:
         gcp:
@@ -61,6 +71,9 @@ requirements:
         aws:
           replicas: 3
           type: m5.2xlarge
+        ibmcloud:
+          replicas: 3
+          type: bx2-8x32
 
 # Loosely defined extra features like hypershift support, non-openshift
 # kubernetes support, spoke support
